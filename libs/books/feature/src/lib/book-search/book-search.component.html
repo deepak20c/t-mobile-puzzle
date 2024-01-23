@@ -15,7 +15,11 @@
 
 <ng-container *ngIf="searchTerm; else empty">
   <div class="book-grid">
-    <div class="book" data-testing="book-item" *ngFor="let b of books">
+    <div
+      class="book"
+      data-testing="book-item"
+      *ngFor="let b of books; let i = index"
+    >
       <div aria-label="Book Title" class="book--title">
         {{ b.title }}
       </div>
@@ -30,7 +34,7 @@
           <div [attr.aria-label]="'Publisher is' + b?.publisher">
             <strong>Publisher:</strong> {{ b.publisher }}
           </div>
-          <div [attr.aria-label]="'Published on:' +b?.publishedDate">
+          <div [attr.aria-label]="'Published on:' + b?.publishedDate">
             <strong>Published:</strong> {{ formatDate(b.publishedDate) }}
           </div>
           <p [innerHTML]="b.description"></p>
@@ -41,6 +45,7 @@
               (click)="addBookToReadingList(b)"
               [disabled]="b.isAdded"
               aria-label="Read button"
+              attr.data-testing="read-button-{{ i + 1 }}"
             >
               Want to Read
             </button>
