@@ -15,7 +15,7 @@
 
 <ng-container *ngIf="searchTerm; else empty">
   <div class="book-grid">
-    <div class="book" data-testing="book-item" *ngFor="let b of books">
+    <div class="book" data-testing="book-item" *ngFor="let b of books;  let i = index;">
       <div aria-label="Book Title" class="book--title">
         {{ b.title }}
       </div>
@@ -41,8 +41,9 @@
               (click)="addBookToReadingList(b)"
               [disabled]="b.isAdded"
               aria-label="Read button"
+              data-testing="want-to-read-button"
             >
-              Want to Read
+            {{ b.finished ? 'Finished' : 'Want to Read' }}
             </button>
           </div>
         </div>
